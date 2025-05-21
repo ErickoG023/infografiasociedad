@@ -1,0 +1,223 @@
+<style>
+    :root {
+        --primary: #0A4F6B; /* Un azul principal ligeramente más profundo */
+        --primary-rgb: 10, 79, 107;
+        --secondary: #0077B6; /* Un azul secundario vibrante */
+        --secondary-rgb: 0, 119, 182;
+        --accent: #EF476F; /* Coral/Rosa fuerte para acentos */
+        --accent-rgb: 239, 71, 111;
+        --highlight: #06D6A0; /* Verde menta para destaques positivos */
+        --highlight-rgb: 6, 214, 160;
+        --custom-yellow: #FFD166;
+        --custom-yellow-rgb: 255, 209, 102;
+
+        --neutral-lightest: #F8F9FA;
+        --neutral-light: #E9ECEF;
+        --neutral-medium: #CED4DA;
+        --neutral-dark: #495057;
+        --neutral-darkest: #212529;
+
+        --text-main: #343A40;
+        --text-muted: #6C757D;
+
+        --border-radius-sm: 0.5rem;
+        --border-radius-md: 0.75rem;
+        --border-radius-lg: 1.25rem;
+
+        --shadow-sm: 0 2px 4px rgba(0,0,0,0.05);
+        --shadow-md: 0 4px 12px rgba(0,0,0,0.08);
+        --shadow-lg: 0 10px 30px rgba(var(--primary-rgb), 0.1);
+    }
+
+    /* Clases de utilidad para colores (manteniendo las existentes y asegurando consistencia) */
+    .bg-accent { background-color: var(--accent); }
+    .text-accent { color: var(--accent); }
+    .bg-highlight { background-color: var(--highlight); }
+    .text-highlight { color: var(--highlight); }
+    .bg-blue-ncs { background-color: var(--secondary); } /* Renombrado conceptualmente a secundario */
+    .text-blue-ncs { color: var(--secondary); }
+    .bg-caribbean-green { background-color: var(--highlight); }
+    .text-caribbean-green { color: var(--highlight); }
+    .bg-coral-red { background-color: var(--accent); }
+    .text-coral-red { color: var(--accent); }
+    .bg-sunglow-yellow { background-color: var(--custom-yellow); }
+    .text-sunglow-yellow { color: var(--custom-yellow); }
+    .text-primary { color: var(--primary); }
+
+
+    body {
+        font-family: 'Inter', sans-serif;
+        background-color: var(--neutral-lightest);
+        background-image: linear-gradient(135deg, var(--neutral-lightest) 0%, #E0EAFC 100%); /* Gradiente sutil */
+        color: var(--text-main);
+        line-height: 1.6;
+    }
+
+    .gradient-header {
+        background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+        border-bottom: 5px solid var(--highlight);
+    }
+    .gradient-header h1 {
+        color: white;
+        text-shadow: 1px 1px 3px rgba(0,0,0,0.2);
+    }
+    .gradient-header p {
+        color: rgba(255,255,255,0.85);
+    }
+
+    .section-title {
+        position: relative;
+        padding-bottom: 1.25rem; /* Aumentado padding */
+        margin-bottom: 3rem; /* Aumentado margen */
+        font-size: 2.5rem; /* Ligeramente más grande */
+        font-weight: 700;
+        text-align: center;
+        color: var(--primary);
+    }
+    .section-title:after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 100px; /* Más ancha */
+        height: 4px; /* Más gruesa */
+        background: linear-gradient(to right, var(--accent), var(--highlight)); /* Gradiente para la línea */
+        border-radius: var(--border-radius-sm);
+    }
+
+    .card {
+        background: white;
+        border-radius: var(--border-radius-lg);
+        transition: all 0.35s cubic-bezier(0.25, 0.8, 0.25, 1); /* Transición más suave */
+        box-shadow: var(--shadow-md);
+        border: 1px solid var(--neutral-light);
+        padding: 2rem; /* Padding aumentado */
+    }
+    .card:hover {
+        transform: translateY(-8px); /* Elevación más pronunciada */
+        box-shadow: var(--shadow-lg);
+    }
+    /* Card con fondo especial para introducción */
+    .card.bg-white\/90 { /* Tailwind genera esta clase, la especificamos */
+      background-color: rgba(255,255,255,0.92);
+      backdrop-filter: blur(8px); /* Efecto vidrio esmerilado sutil */
+    }
+    /* Estilos especiales para las tarjetas de funciones integradoras/disociativas */
+    .card.bg-green-50 { /* Funciones integradoras */
+        background-color: rgba(var(--highlight-rgb), 0.08);
+        border-left: 5px solid var(--highlight);
+    }
+    .card.bg-red-50 { /* Aspectos disociativos */
+        background-color: rgba(var(--accent-rgb), 0.08);
+        border-left: 5px solid var(--accent);
+    }
+
+    .flow-step {
+        position: relative;
+        background: var(--neutral-lightest);
+        padding: 1rem 1.5rem; /* Más padding horizontal */
+        border-radius: var(--border-radius-md);
+        box-shadow: var(--shadow-sm);
+        text-align: center;
+        min-width: 160px; /* Ancho mínimo */
+        transition: all 0.3s ease;
+        border: 1px solid var(--neutral-medium);
+        color: var(--text-main); /* Color de texto por defecto */
+    }
+    .flow-step:hover {
+        transform: scale(1.03);
+        box-shadow: var(--shadow-md);
+    }
+    /* Estilos para flow-steps con color de fondo */
+    .flow-step.bg-accent, .flow-step.bg-highlight, .flow-step.bg-blue-ncs {
+        color: white; /* Asegurar texto blanco en fondos de color */
+        border-color: transparent;
+    }
+    .flow-step.bg-accent { background-color: var(--accent); }
+    .flow-step.bg-highlight { background-color: var(--highlight); }
+    .flow-step.bg-blue-ncs { background-color: var(--secondary); }
+
+
+    .flow-arrow {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 2rem; /* Flechas más grandes */
+        color: var(--secondary);
+        margin: 0.75rem; /* Margen ajustado */
+        opacity: 0.8;
+    }
+
+    .venn-circle {
+        border-radius: 50%;
+        mix-blend-mode: multiply;
+        position: absolute;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: 600;
+        opacity: 0.9; /* Opacidad ajustada */
+        transition: transform 0.3s ease, opacity 0.3s ease;
+        box-shadow: inset 0 0 8px rgba(0,0,0,0.1); /* Sombra interior sutil */
+    }
+    .venn-circle:hover {
+        transform: scale(1.05);
+        opacity: 1;
+    }
+    /* Se asegura que las clases de texto de Tailwind anulen el color si es necesario */
+    .venn-circle.text-white { color: white !important; }
+    .venn-circle.text-primary { color: var(--primary) !important; }
+
+    /* Estilos para la tabla */
+    table thead tr.bg-primary { /* Tailwind genera esta clase */
+        background-color: var(--primary) !important; /* Asegurar que nuestro primary se use */
+    }
+    table th {
+        font-weight: 600; /* Títulos de tabla más notorios */
+    }
+    table td, table th {
+        padding: 1rem 1.25rem; /* Mayor padding en celdas */
+        border-bottom: 1px solid var(--neutral-light);
+    }
+    table tbody tr:nth-child(even) {
+        background-color: rgba(var(--secondary-rgb), 0.03); /* Rayado sutil con color secundario */
+    }
+    table tbody tr:hover {
+        background-color: rgba(var(--secondary-rgb), 0.1);
+        color: var(--primary); /* Color de texto en hover */
+    }
+    /* Ajuste para el contenedor de la tabla para mejor sombra en overflow */
+    .card.overflow-x-auto {
+        padding: 0; /* Quitar padding del card para que la tabla lo maneje */
+    }
+    .card.overflow-x-auto table {
+        border-radius: var(--border-radius-lg); /* Heredar el border-radius del card */
+        overflow: hidden; /* Para que el radius aplique a la tabla */
+    }
+
+
+    /* Cita destacada */
+    blockquote {
+        border-left: 4px solid var(--secondary);
+        padding: 1rem 1.5rem !important; /* Forzar padding */
+        margin: 1.5rem 0 !important; /* Forzar margen */
+        font-style: italic;
+        font-size: 1.15rem !important; /* Tamaño de fuente para la cita */
+    }
+    blockquote.bg-yellow-400 { /* Clase de Tailwind */
+        background-color: rgba(var(--custom-yellow-rgb), 0.15) !important; /* Fondo más sutil */
+        color: var(--neutral-darkest) !important;
+        border-color: var(--custom-yellow);
+    }
+    blockquote cite {
+        font-size: 0.9rem;
+        color: var(--text-muted);
+    }
+
+    /* Mejoras en el gráfico */
+    #tiposChart {
+        border-radius: var(--border-radius-md);
+        padding: 0.5rem; /* Un pequeño padding alrededor del canvas */
+    }
+</style>
